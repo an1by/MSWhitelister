@@ -1,0 +1,9 @@
+name: MSWhitelister
+version: '${project.version}'
+main: net.aniby.mswhitelister.MSWhitelister
+api-version: '1.20'
+load: POSTWORLD
+depend: ["ComfyWhitelist"]
+authors: [An1by]
+description: Exclusive whitelist-bot for MineStar by An1by
+website: aniby.net

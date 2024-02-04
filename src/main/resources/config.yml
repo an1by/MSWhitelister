@@ -1,0 +1,35 @@
+messages:
+  dm_message: "Ваша анкета принята!"
+  not_in_guild: "Игрока нет на сервере в дискорде!"
+  already_written: "Вы уже заполняли анкету!"
+  form_sent: "Вы отправили свою заявку на рассмотрение!"
+  nickname_error: "Произошла ошибка! Никнейм не найден! Обратитесь к администратору!"
+  accepted: "<@%user_id> (%user_nickname) был принят на сервер администратором <@&admin_id%>!"
+  declined: "Анкета <@%user_id> (%user_nickname) была отклонена администратором <@&admin_id%>!"
+
+discord:
+  token: ""
+  rpc: "aniby.net"
+
+  channels:
+    log: ""
+    form: ""
+
+  roles:
+    player: ""
+    declined: ""
+
+  log:
+    embed: '{"title": "Новая заявка!", "description": "Заполнял - <@%discord_id>", "fields":[{"name": "%field_nickname_label", "value": "%field_nickname_value", "inline": false}, {"name": "%field_age_label", "value": "%field_age_value", "inline": false}]}'
+  form:
+    button_label: "Оставить заявку"
+    embed: '{"title":"Заполните заявку!","color":null,"description":"Типа что-то,\nчто нам нужно"}'
+    modal:
+      label: ""
+      questions:
+        nickname: # НЕ МЕНЯТЬ ID НА ЭТОЙ СТРОЧКЕ!
+          label: "Никнейм"
+          style: "SHORT"
+        age:
+          label: "Возраст"
+          style: "PARAGRAPH"
