@@ -12,6 +12,7 @@ import net.dv8tion.jda.api.events.session.ReadyEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import net.dv8tion.jda.api.utils.data.DataObject;
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.jetbrains.annotations.NotNull;
@@ -34,7 +35,6 @@ public class DiscordListener extends ListenerAdapter {
         MessageEmbed embed = EmbedBuilder.fromData(
                 DataObject.fromJson(
                         section.getString("form.embed")
-                                .replace("\\n", "\n")
                 )
         ).build();
 
@@ -59,7 +59,7 @@ public class DiscordListener extends ListenerAdapter {
                     .filter(r -> r.getId().equals(bot.declinedRole) || r.getId().equals(bot.playerRole))
                     .findFirst().orElse(null);
             if (role != null) {
-                event.reply(MSMessages.alreadyWritten).queue();
+                event.reply(MSMessages.alreadyWritten).setEphemeral(true).queue();
                 return;
             }
 
@@ -84,8 +84,10 @@ public class DiscordListener extends ListenerAdapter {
                     .replace("%user_nickname", nickname)
                     .replace("%admin_id", member.getId());
 
-            Role addRole = guild.getRoleById(accepted ? MSWhitelister.getBot().playerRole : MSWhitelister.getBot().declinedRole);
-            target.getRoles().add(addRole);
+            String roleId = accepted ? MSWhitelister.getBot().playerRole : MSWhitelister.getBot().declinedRole;
+            Role addRole = guild.getRoleById(roleId);
+            Bukkit.getLogger().info(addRole + " | " + roleId);
+            guild.addRoleToMember(target, addRole).queue();
 
             if (accepted) {
                 MSWhitelister.getWhitelistStorage().addPlayer(nickname);
@@ -129,7 +131,7 @@ public class DiscordListener extends ListenerAdapter {
             }
 
             if (nickname == null) {
-                event.reply(MSMessages.nicknameError).queue();
+                event.reply(MSMessages.nicknameError).setEphemeral(true).queue();
                 return;
             }
 
@@ -142,7 +144,7 @@ public class DiscordListener extends ListenerAdapter {
                     Button.danger("mcwl:log:decline:" + nickname + ":" + user.getId(), "Отклонить")
             ).queue();
 
-            event.reply(MSMessages.formSent).queue();
+            event.reply(MSMessages.formSent).setEphemeral(true).queue();
         }
     }
 }

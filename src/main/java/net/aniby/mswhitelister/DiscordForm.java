@@ -18,7 +18,7 @@ public class DiscordForm {
         for (String id : keys) {
             ConfigurationSection subject = section.getConfigurationSection(id);
             TextInputStyle style = TextInputStyle.valueOf(subject.getString("style", "SHORT"));
-            String placeholder = subject.getString(subject.getString("placeholder", null));
+            String placeholder = subject.getString("placeholder", null);
             String label = subject.getString("label");
             TextInput input = TextInput.create(id, label, style)
                     .setMinLength(1)

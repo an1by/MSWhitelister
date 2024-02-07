@@ -4,8 +4,8 @@ messages:
   already_written: "Вы уже заполняли анкету!"
   form_sent: "Вы отправили свою заявку на рассмотрение!"
   nickname_error: "Произошла ошибка! Никнейм не найден! Обратитесь к администратору!"
-  accepted: "<@%user_id> (%user_nickname) был принят на сервер администратором <@&admin_id%>!"
-  declined: "Анкета <@%user_id> (%user_nickname) была отклонена администратором <@&admin_id%>!"
+  accepted: "<@%user_id> (%user_nickname) был принят на сервер администратором <@&admin_id>!"
+  declined: "Анкета <@%user_id> (%user_nickname) была отклонена администратором <@&admin_id>!"
 
 discord:
   token: ""
@@ -25,7 +25,7 @@ discord:
     button_label: "Оставить заявку"
     embed: '{"title":"Заполните заявку!","color":null,"description":"Типа что-то,\nчто нам нужно"}'
     modal:
-      label: ""
+      label: "Анкета"
       questions:
         nickname: # НЕ МЕНЯТЬ ID НА ЭТОЙ СТРОЧКЕ!
           label: "Никнейм"
