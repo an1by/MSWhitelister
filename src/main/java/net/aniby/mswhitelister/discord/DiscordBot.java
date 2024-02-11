@@ -4,6 +4,7 @@ import net.aniby.mswhitelister.MSWhitelister;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
+import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
@@ -16,6 +17,7 @@ public class DiscordBot {
         return jda;
     }
 
+    public Guild guild;
     public TextChannel logChannel;
     public TextChannel formChannel;
 

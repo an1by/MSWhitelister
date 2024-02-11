@@ -10,6 +10,7 @@ public class MSMessages {
     public static String declined;
     public static String dmMessage;
     public static String notInGuild;
+    public static String userNotExists;
 
     public static void init(MSWhitelister plugin) {
         ConfigurationSection section = plugin.getConfig().getConfigurationSection("messages");
@@ -21,5 +22,6 @@ public class MSMessages {
         declined = section.getString("declined");
         dmMessage = section.getString("dm_message");
         notInGuild = section.getString("not_in_guild");
+        userNotExists = section.getString("user_not_exists");
     }
 }

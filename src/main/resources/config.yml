@@ -6,11 +6,13 @@ messages:
   nickname_error: "Произошла ошибка! Никнейм не найден! Обратитесь к администратору!"
   accepted: "<@%user_id> (%user_nickname) был принят на сервер администратором <@&admin_id>!"
   declined: "Анкета <@%user_id> (%user_nickname) была отклонена администратором <@&admin_id>!"
+  user_not_exists: "Пользователя не существует!"
 
 discord:
   token: ""
   rpc: "aniby.net"
 
+  guild: ""
   channels:
     log: ""
     form: ""

@@ -6,7 +6,7 @@
 
     <groupId>net.aniby</groupId>
     <artifactId>MSWhitelister</artifactId>
-    <version>0.2</version>
+    <version>0.5</version>
     <packaging>jar</packaging>
 
     <name>MSWhitelister</name>
