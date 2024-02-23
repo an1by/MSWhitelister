@@ -28,9 +28,7 @@ public class DiscordListener extends ListenerAdapter {
         ConfigurationSection channels = section.getConfigurationSection("channels");
 
         DiscordBot bot = MSWhitelister.getBot();
-        JDA jda = bot.getJda();
-        bot.guild = jda.getGuildById(section.getString("guild"));
-        bot.formChannel = bot.guild.getTextChannelById(channels.getString("form"));
+        bot.formChannel = bot.getJda().getTextChannelById(channels.getString("form"));
 
 
         MessageEmbed embed = EmbedBuilder.fromData(
@@ -44,7 +42,7 @@ public class DiscordListener extends ListenerAdapter {
         try {
             MessageHistory history = new MessageHistory(bot.formChannel);
             List<Message> msgs = history.retrievePast(100).complete();
-            if (msgs.size() > 1)
+            if (!msgs.isEmpty())
                 bot.formChannel.deleteMessages(msgs).queue();
         } catch (Exception exception) {
             MSWhitelister.getInstance().getLogger().info(
@@ -58,7 +56,7 @@ public class DiscordListener extends ListenerAdapter {
         ).queue();
 
         // Log channel (form callback for admins)
-        bot.logChannel = bot.guild.getTextChannelById(channels.getString("log"));
+        bot.logChannel = bot.getJda().getTextChannelById(channels.getString("log"));
     }
 
     @Override
@@ -86,7 +84,13 @@ public class DiscordListener extends ListenerAdapter {
             String nickname = args[3];
             String discordId = args[4];
 
-            Member target = bot.guild.getMemberById(discordId);
+            Guild guild = bot.formChannel.getGuild();
+            Member target;
+            try {
+                target = guild.retrieveMemberById(discordId).complete();
+            } catch (Exception exception) {
+                target = null;
+            }
             if (target == null) {
                 event.editMessage(MSMessages.notInGuild).setEmbeds(new ArrayList<>()).setComponents(new ArrayList<>()).queue();
                 return;
@@ -106,8 +110,8 @@ public class DiscordListener extends ListenerAdapter {
 
             // Add role
             String roleId = accepted ? MSWhitelister.getBot().playerRole : MSWhitelister.getBot().declinedRole;
-            Role addRole = bot.guild.getRoleById(roleId);
-            bot.guild.addRoleToMember(target, addRole).queue();
+            Role addRole = guild.getRoleById(roleId);
+            guild.addRoleToMember(target, addRole).queue();
 
             if (accepted) {
                 MSWhitelister.getWhitelistStorage().addPlayer(nickname);

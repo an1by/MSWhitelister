@@ -17,7 +17,6 @@ public class DiscordBot {
         return jda;
     }
 
-    public Guild guild;
     public TextChannel logChannel;
     public TextChannel formChannel;
 
